@@ -30,7 +30,7 @@ class WeatherViewController: UIViewController {
         
         if textField.text != "" {
             
-            let city = textField.text
+            let city = textField.text!
             weatherManager.fetchWeather(cityName: city)
             
         }

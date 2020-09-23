@@ -9,12 +9,26 @@
 import Foundation
 
 struct WeatherManager {
-
-    let urlStart = ""
     
     func fetchWeather(cityName: String) {
         
+        let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(OpenWeatherKey)"
         
+        if let url = URL(string: urlString) {
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: url) { (data, response, error) in
+                if let presentError = error {
+                    print(presentError)
+                }
+                
+                if let safeData = data {
+                    print(String(data: safeData, encoding: .utf8)!)
+                }
+            }
+            
+            task.resume()
+            
+        }
         
     }
     
