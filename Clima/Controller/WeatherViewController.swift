@@ -52,6 +52,8 @@ extension WeatherViewController: CLLocationManagerDelegate {
         if let location = locations.last {
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
+            
+            weatherManager.fetchWeather(lat: lat, lon: lon)
         }
         
     }

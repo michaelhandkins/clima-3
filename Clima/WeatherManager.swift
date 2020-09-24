@@ -12,9 +12,20 @@ struct WeatherManager {
     
     var delegate: WeatherManagerDelegate?
     
+    func fetchWeather(lat: Double, lon: Double) {
+        let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(OpenWeatherKey)&units=imperial"
+        
+        self.networkRequest(urlString: urlString)
+    }
+    
     func fetchWeather(cityName: String) {
         
         let urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(OpenWeatherKey)&units=imperial"
+        
+        self.networkRequest(urlString: urlString)
+    }
+    
+    func networkRequest(urlString: String) {
         
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
