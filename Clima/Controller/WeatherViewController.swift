@@ -54,3 +54,19 @@ class WeatherViewController: UIViewController {
 //
 //}
 
+extension WeatherViewController: WeatherManagerDelegate {
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
+        self.conditionImageView.image = UIImage(systemName: weather.conditionSymbol)
+        self.cityLabel.text = weather.city
+        self.temperatureLabel.text = weather.temperature
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+    
+    
+    
+    
+}
+
