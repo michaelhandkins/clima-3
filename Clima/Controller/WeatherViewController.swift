@@ -17,15 +17,16 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     
     var weatherManager = WeatherManager()
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         weatherManager.delegate = self
         
-//        let locationManager = CLLocationManager()
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.requestLocation()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
     }
     
     @IBAction func searchPressed(_ sender: UIButton) {
@@ -44,17 +45,17 @@ class WeatherViewController: UIViewController {
 
 }
 
-//extension WeatherViewController: CLLocationManagerDelegate {
-//
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//
-//    }
-//
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//
-//    }
-//
-//}
+extension WeatherViewController: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("Successfully updated location")
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+
+}
 
 extension WeatherViewController: WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
