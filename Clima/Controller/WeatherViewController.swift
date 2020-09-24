@@ -16,10 +16,12 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     
-    let weatherManager = WeatherManager()
+    var weatherManager = WeatherManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        weatherManager.delegate = self
         
 //        let locationManager = CLLocationManager()
 //        locationManager.requestWhenInUseAuthorization()
@@ -56,13 +58,16 @@ class WeatherViewController: UIViewController {
 
 extension WeatherViewController: WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel) {
-        self.conditionImageView.image = UIImage(systemName: weather.conditionSymbol)
-        self.cityLabel.text = weather.city
-        self.temperatureLabel.text = weather.temperature
+        DispatchQueue.main.async {
+            self.conditionImageView.image = UIImage(systemName: weather.conditionSymbol)
+            self.cityLabel.text = weather.city
+            self.temperatureLabel.text = weather.temperature
+        }
+        
     }
     
     func didFailWithError(error: Error) {
-        print(error)
+        print("Error while trying to retrieve data in URLSession: \(error)")
     }
     
     
