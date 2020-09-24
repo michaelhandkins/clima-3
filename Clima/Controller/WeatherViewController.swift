@@ -49,6 +49,11 @@ extension WeatherViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("Successfully updated location")
+        if let location = locations.last {
+            let lat = location.coordinate.latitude
+            let lon = location.coordinate.longitude
+        }
+        
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
