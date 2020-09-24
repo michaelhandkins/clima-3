@@ -23,7 +23,10 @@ struct WeatherManager {
                 
                 if let safeData = data {
                     if let weatherData = self.parseData(data: safeData) {
-                        print(weatherData.main.temp)
+                        let temp = String(Int(weatherData.main.temp))
+                        let cityName = weatherData.name
+                        let id = weatherData.weather[0].id
+                        let weatherModel = WeatherModel(temperature: temp, conditionID: id, city: cityName)
                     }
                 }
             }
