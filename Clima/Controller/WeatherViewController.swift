@@ -37,18 +37,16 @@ class WeatherViewController: UIViewController {
             weatherManager.fetchWeather(cityName: city)
             
         }
-        
-        
     }
-    
-
-
 }
 
 extension WeatherViewController: CLLocationManagerDelegate {
 
+    @IBAction func navButtonPressed(_ sender: UIButton) {
+        locationManager.requestLocation()
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("Successfully updated location")
         if let location = locations.last {
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
