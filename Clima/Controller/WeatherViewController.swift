@@ -33,7 +33,7 @@ class WeatherViewController: UIViewController {
         
         if textField.text != "" {
             
-            let city = textField.text!
+            let city = (textField.text!).replacingOccurrences(of: " ", with: "+")
             weatherManager.fetchWeather(cityName: city)
             
         }
